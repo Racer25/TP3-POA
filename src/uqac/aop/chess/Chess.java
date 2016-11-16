@@ -61,7 +61,7 @@ public class Chess
 			fh.setFormatter(formatter);
 
 			// the following statement is used to log any messages
-			logger.info("Nouvelle partie: ");
+			logger.info("Nouvelle partie");
 
 		} 
 		catch (SecurityException e)
