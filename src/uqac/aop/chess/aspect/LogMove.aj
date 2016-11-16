@@ -1,10 +1,6 @@
 package uqac.aop.chess.aspect;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.logging.Logger;
 
 import uqac.aop.chess.agent.Move;
 import uqac.aop.chess.Board;
@@ -15,19 +11,10 @@ public aspect LogMove
 	
 	after() : publicMove()
 	{
+		Logger logger = Logger.getLogger("LogMove");
 		System.out.println(thisJoinPoint.getArgs()[0].toString());
-		File log=new File("log.txt");
 		
-		try
-		{
-			PrintWriter pw = new PrintWriter (new BufferedWriter (new FileWriter (log, true)));
-			pw.println(thisJoinPoint.getArgs()[0].toString());
-			pw.close();
-		}
-		catch(IOException e)
-		{
-			System.out.println ("Erreur lors de la lecture : " + e.getMessage());
-		}
+		logger.info(thisJoinPoint.getArgs()[0].toString());
 	}
 	
 }
