@@ -25,7 +25,7 @@ public class AiPlayer extends Player {
 
 		try {
 			playGround.movePiece(mv);
-		} catch (Exception e) {
+		} catch (RuntimeException e) {
 			makeMove();
 		}
 
