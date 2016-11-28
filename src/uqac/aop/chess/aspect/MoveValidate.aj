@@ -1,7 +1,5 @@
 package uqac.aop.chess.aspect;
 
-import java.util.logging.Logger;
-
 import uqac.aop.chess.Board;
 import uqac.aop.chess.agent.*;
 
@@ -25,12 +23,9 @@ public aspect MoveValidate {
 			}
 		} catch (ArrayIndexOutOfBoundsException e) {
 			moveValid = false;
-			Logger.getLogger("LogMove").warning("Hors plateau");
 		}
 
 		if (moveValid == false) {
-			if (p instanceof HumanPlayer)
-				Logger.getLogger("LogMove").warning("Movement non autorisé du joueur");
 			return false;
 		} else {
 			return proceed(mv);
