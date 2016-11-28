@@ -13,11 +13,22 @@ public aspect MoveValidate {
 		Board b = (Board) thisJoinPoint.getTarget();
 		Player p = (Player) thisJoinPoint.getThis();
 
-		boolean moveError = (mv == null) || !b.getGrid()[mv.xI][mv.yI].isOccupied()
-				|| b.getGrid()[mv.xI][mv.yI].getPiece().getPlayer() == p.getColor()
-				|| !b.getGrid()[mv.xI][mv.yI].getPiece().isMoveLegal(mv);
+		boolean moveValid;
 
-		if (moveError == true) {
+		try {
+			moveValid = (mv != null);
+			moveValid = moveValid && b.getGrid()[mv.xI][mv.yI].isOccupied();
+			moveValid = moveValid && b.getGrid()[mv.xI][mv.yI].getPiece().getPlayer() == p.getColor();
+			moveValid = moveValid && b.getGrid()[mv.xI][mv.yI].getPiece().isMoveLegal(mv);
+			if (b.getGrid()[mv.xF][mv.yF].isOccupied()) {
+				moveValid = moveValid && b.getGrid()[mv.xF][mv.yF].getPiece().getPlayer() != p.getColor();
+			}
+		} catch (ArrayIndexOutOfBoundsException e) {
+			moveValid = false;
+			Logger.getLogger("LogMove").warning("Hors plateau");
+		}
+
+		if (moveValid == false) {
 			if (p instanceof HumanPlayer)
 				Logger.getLogger("LogMove").warning("Movement non autorisé du joueur");
 			return false;
