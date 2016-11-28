@@ -10,7 +10,7 @@ public class HumanPlayer extends Player {
 	}
 
 	@Override
-	public Move makeMove() {
+	public void makeMove() {
 		Move mv;
 		char initialX = '\0';
 		char initialY = '\0';
@@ -27,8 +27,6 @@ public class HumanPlayer extends Player {
 
 			mv = new Move(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1');
 		} while (!playGround.movePiece(mv));
-
-		return mv;
 	}
 
 	private static char Lire() {

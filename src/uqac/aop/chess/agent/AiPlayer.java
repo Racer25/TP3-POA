@@ -13,7 +13,7 @@ public class AiPlayer extends Player {
 	}
 
 	@Override
-	public Move makeMove() {
+	public void makeMove() {
 		Move mv;
 		int iniX = -1, iniY = -1, finX = -1, finY = -1;
 
@@ -26,6 +26,5 @@ public class AiPlayer extends Player {
 		} while (!playGround.movePiece(mv));
 
 		System.out.println("Votre coup? <" + mv.toString() + ">");
-		return mv;
 	}
 }

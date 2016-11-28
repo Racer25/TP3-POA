@@ -9,7 +9,7 @@ public abstract class Player {
 	protected int Colour;
 	protected Board playGround;
 
-	public abstract Move makeMove();
+	public abstract void makeMove();
 	
 	public int getColor(){
 		return this.Colour;
