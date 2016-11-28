@@ -52,9 +52,10 @@ public class Board {
 		grid[4][7].setPiece(new King(Player.BLACK));
 	}
 
-	public void movePiece(Move mv) {
+	public boolean movePiece(Move mv) {
 		grid[mv.xF][mv.yF].setPiece(grid[mv.xI][mv.yI].getPiece());
 		grid[mv.xI][mv.yI].release();
+		return true;
 	}
 
 	public Spot[][] getGrid() {

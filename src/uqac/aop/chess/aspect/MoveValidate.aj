@@ -7,11 +7,9 @@ import uqac.aop.chess.agent.*;
 
 public aspect MoveValidate {
 
-	pointcut publicMove():call(public void Board.movePiece(Move));
+	pointcut publicMove(Move mv):call(public boolean Board.movePiece(Move)) && args(mv);
 
-	before() : publicMove()
-	{
-		Move mv = (Move) thisJoinPoint.getArgs()[0];
+	boolean around(Move mv) : publicMove(mv) {
 		Board b = (Board) thisJoinPoint.getTarget();
 		Player p = (Player) thisJoinPoint.getThis();
 
@@ -22,7 +20,10 @@ public aspect MoveValidate {
 		if (moveError == true) {
 			if (p instanceof HumanPlayer)
 				Logger.getLogger("LogMove").warning("Movement non autorisé du joueur");
-			throw new RuntimeException("Illegal Movement");
+			return false;
+		} else {
+			return proceed(mv);
 		}
+
 	}
 }

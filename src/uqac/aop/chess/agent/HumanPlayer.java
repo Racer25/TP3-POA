@@ -1,7 +1,5 @@
 package uqac.aop.chess.agent;
 
-import java.util.logging.Logger;
-
 import uqac.aop.chess.Board;
 
 public class HumanPlayer extends Player {
@@ -19,20 +17,17 @@ public class HumanPlayer extends Player {
 		char finalX = '\0';
 		char finalY = '\0';
 
-		System.out.print("Votre coup? <a2a4> ");
-		initialX = Lire();
-		initialY = Lire();
-		finalX = Lire();
-		finalY = Lire();
-		ViderBuffer();
+		do {
+			System.out.print("Votre coup? <a2a4> ");
+			initialX = Lire();
+			initialY = Lire();
+			finalX = Lire();
+			finalY = Lire();
+			ViderBuffer();
 
-		mv = new Move(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1');
-		
-		try {
-			playGround.movePiece(mv);
-		} catch (RuntimeException e) {
-			makeMove();
-		}
+			mv = new Move(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1');
+		} while (!playGround.movePiece(mv));
+
 		return mv;
 	}
 

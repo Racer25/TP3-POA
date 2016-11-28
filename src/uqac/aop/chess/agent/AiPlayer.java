@@ -17,17 +17,13 @@ public class AiPlayer extends Player {
 		Move mv;
 		int iniX = -1, iniY = -1, finX = -1, finY = -1;
 
-		iniX = Dies.nextInt(8);
-		iniY = Dies.nextInt(8);
-		finX = Dies.nextInt(8);
-		finY = Dies.nextInt(8);
-		mv = new Move(iniX, iniY, finX, finY);
-
-		try {
-			playGround.movePiece(mv);
-		} catch (RuntimeException e) {
-			makeMove();
-		}
+		do {
+			iniX = Dies.nextInt(8);
+			iniY = Dies.nextInt(8);
+			finX = Dies.nextInt(8);
+			finY = Dies.nextInt(8);
+			mv = new Move(iniX, iniY, finX, finY);
+		} while (!playGround.movePiece(mv));
 
 		System.out.println("Votre coup? <" + mv.toString() + ">");
 		return mv;
