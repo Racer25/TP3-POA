@@ -7,7 +7,7 @@ import uqac.aop.chess.Board;
 
 public aspect LogMove
 {
-	pointcut publicMove():call(public void Board.movePiece(Move));
+	pointcut publicMove():call(public boolean Board.movePiece(Move));
 	
 	after() : publicMove()
 	{
