@@ -20,7 +20,7 @@ public aspect MoveValidate {
 			moveValid = moveValid && b.getGrid()[mv.xI][mv.yI].isOccupied();
 			moveValid = moveValid && b.getGrid()[mv.xI][mv.yI].getPiece().getPlayer() == p.getColor();
 			moveValid = moveValid && b.getGrid()[mv.xI][mv.yI].getPiece().isMoveLegal(mv);
-			if (b.getGrid()[mv.xF][mv.yF].isOccupied()) {
+			if (moveValid && b.getGrid()[mv.xF][mv.yF].isOccupied()) {
 				moveValid = moveValid && b.getGrid()[mv.xF][mv.yF].getPiece().getPlayer() != p.getColor();
 			}
 		} catch (ArrayIndexOutOfBoundsException e) {
